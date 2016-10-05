@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">BiShare</string>
+
+    <string name="google_api_key">AIzaSyAXtxPPKLBV4QvvrKkfhA3vI06srn1Ltj4</string>
+    <string name="title_activity_maps">Docking Bays Location on Map</string>
+    <string name="URL">http://192.168.1.238:8088/BiShareJettyServlet/BiShareServlet</string>
+    <integer name="google_play_services_version">9452000</integer>
+</resources>
