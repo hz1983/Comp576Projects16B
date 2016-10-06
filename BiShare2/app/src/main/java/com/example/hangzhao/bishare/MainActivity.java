@@ -40,23 +40,51 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    Fragment mapFragment;
+    Fragment scanFragment;
+    Fragment statusFragment;
+
     private void showFragment(int menuId, boolean isReselected) {
 //        ft = getSupportFragmentManager().beginTransaction();
         FragmentManager fm = getFragmentManager();
-
+        android.app.FragmentTransaction ft = fm.beginTransaction();
         if (menuId == R.id.locations) {
-            Fragment mapFragment = new MapFragment();
-            fm.beginTransaction().replace(R.id.activity_main, mapFragment).commit();
-        }
 
-//        else if (menuId == R.id.scan) {
-//            Toast.makeText(this, "Scan Button Selected", Toast.LENGTH_SHORT).show();
-//            ft.replace(R.id.fragment_place_holder, new StatusFragment());
-//        } else {
-//            Toast.makeText(this, "Status Button Selected", Toast.LENGTH_SHORT).show();
-//            ft.replace(R.id.fragment_place_holder, new ScanFragment());
-//        }
-//        ft.commit();
+            if(scanFragment!=null)ft.hide(scanFragment);
+            if(statusFragment!=null)ft.hide(statusFragment);
+
+            if(mapFragment==null){
+                mapFragment = new MapFragment();
+                ft.add(R.id.map_fragment,mapFragment);
+            }else{
+                ft.show(mapFragment);
+            }
+
+
+        }
+        else if (menuId == R.id.scan) {
+            if(mapFragment!=null)ft.hide(mapFragment);
+            if(statusFragment!=null)ft.hide(statusFragment);
+
+            if(scanFragment==null){
+                scanFragment = new ScanFragment();
+                ft.add(R.id.map_fragment,scanFragment);
+            }else{
+                ft.show(scanFragment);
+            }
+
+        } else {
+            if(mapFragment!=null)ft.hide(mapFragment);
+            if(scanFragment!=null)ft.hide(scanFragment);
+
+            if(statusFragment==null){
+                statusFragment = new StatusFragment();
+                ft.add(R.id.map_fragment,statusFragment);
+            }else{
+                ft.show(statusFragment);
+            }
+        }
+        ft.commit();
     }
 
     @Override
